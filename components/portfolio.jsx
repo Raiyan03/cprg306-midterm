@@ -13,7 +13,6 @@ const Portfolio = () => {
         <h1>{name}</h1>
         <h2>{title}</h2>
         <p>{description}</p>
-
         <h3>Skills:</h3>
         <ul>
           {skills.map((skill, index) => (

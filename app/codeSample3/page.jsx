@@ -1,10 +1,30 @@
 "use client";
 
 import APICallExam from "@/components/apiCallExam";
+import { useState } from "react";
+
+
+
+const fetchAPI = async () => {
+  const baseURL = "https://webdev2-class-demo.vercel.app/api/sampleReqs/";
+  const pass = "ehen2rfow";
+  console.log("fetching"); 
+  try {
+    const res = await fetch(`${baseURL}${pass}`);
+    if (!res.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await res.json();
+    console.log(data); 
+    return data.secretCode;
+  } catch (error) {
+    console.error("There was an error with the fetch: ", error);
+  }
+};
 
 const CodeSample3 = () => {
   const myList = ["Cat", "Dog", "Chicken", "Cow"];
-
+  const [code, setCode] = useState("");
   return (
     <div className="h-screen bg-white p-2 text-black">
       <h1 className="pb-2 text-blue-600">Code sample 3: Making an API Call</h1>
@@ -23,7 +43,7 @@ const CodeSample3 = () => {
       </div>
 
       <div className="p-4">
-        <APICallExam list={myList} />
+        <APICallExam list={myList} code={code} handleClick={() => {setCode(fetchAPI())}} />
       </div>
     </div>
   );
